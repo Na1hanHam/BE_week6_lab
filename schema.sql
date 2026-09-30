@@ -26,4 +26,4 @@ INSERT INTO menus (name, price, type, stock) VALUES
  ('ไข่เจียว', 45.00, 'จานเดียว', 50),
  ('ชาเย็น', 35.00, 'เครื่องดื่ม', 99);
 
- SELECT id, name, price, type, stock FROM menus ORDER BY id;
+ 
