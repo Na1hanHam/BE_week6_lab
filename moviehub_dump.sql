@@ -266,6 +266,7 @@ COPY public.genres (id, name_en, name_th) FROM stdin;
 --
 
 COPY public.members (id, email, password_hash, display_name, avatar_url, role, created_at, updated_at) FROM stdin;
+1	nida@example.com	$2a$10$nQQkhkFof4EYaJ0mvx4JUOkjGoPL3otOyJhhqdJUH/vQrS4bGMKPW	นิดา	\N	member	2026-10-14 03:56:42.549918+00	2026-10-14 03:56:42.549918+00
 \.
 
 
