@@ -16,11 +16,11 @@ type Movie struct {
     Poster  *string `json:"poster"`
 }
 
+// MovieDetail คือหนังหนึ่งเรื่องพร้อมเรื่องย่อ ใช้กับหน้ารายละเอียด
 type MovieDetail struct {
     Movie
     Detail *string `json:"detail"`
 }
-
 
 // SearchMovies ค่าจากผู้ใช้เดินทางผ่าน $1 แยกจากคำสั่งเสมอ
 func (s *Store) SearchMovies(ctx context.Context, q string) ([]Movie, error) {
@@ -31,7 +31,8 @@ func (s *Store) SearchMovies(ctx context.Context, q string) ([]Movie, error) {
                   WHERE mg.movie_id = m.id AND mg.position = 0),
                 extract(year FROM m.release_date)::int,
                 round(m.vote_average, 1)::float8,
-                'https://image.tmdb.org/t/p/w500' || m.poster_path
+               CASE WHEN m.poster_path LIKE 'http%' THEN m.poster_path
+                     ELSE 'https://image.tmdb.org/t/p/w500' || m.poster_path END
          FROM movies m
          WHERE lower(m.title) LIKE '%' || lower($1) || '%'
          ORDER BY m.popularity DESC`, q)
